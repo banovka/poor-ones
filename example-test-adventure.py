@@ -35,6 +35,7 @@ class Engine():
 
     def play(self):
 
+        # How to navigate
         def choose_direction():
             directions = self.current_place.directions
             print("\nYou can leave to: ")
@@ -57,7 +58,7 @@ class Engine():
             except:
                 print("\nSorry, something went wrong...")
                 return
-
+        # How to choose an object
         def choose_object():
             print("\nYou see: ")
             for i in range(1, (len(self.current_place.object)+1)):
@@ -77,6 +78,7 @@ class Engine():
                 print("\nSorry, something went wrong...")
                 return
 
+        # How to show items and crafting them
         def items():
             if item:
                 print("\nYour items: ")
@@ -128,6 +130,7 @@ class Engine():
                 print("\nSorry, at this time you do not have any items.")
                 return
 
+        # The main menue
         while 1 == 1:
             print("------------------------------------------------------------------------")
             print("\n" + self.current_place.name + " - " + self.current_place.description)
@@ -167,7 +170,7 @@ craft = [
         ]
 
 # May you have to do a task to go further. Use as "global" in the beginnning of a function.
-task = []
+task = ["relax", "art_expert"]
 
 #
 # Working with a list in a list. Be carefull with counting the indices!
@@ -189,6 +192,7 @@ def picture(self):
     e = input("Do you [l]ike it? ")
     if e == "l":
         print("You are an expert!")
+        task.append("art_expert")
         return
     else:
         print("You should better go to school again...")
@@ -255,7 +259,7 @@ def sofa(self):
             print(".")
             time.sleep(1)
         print("Ahh! It is good to take a rest.")
-        task.append("Relax")
+        task.append("relax")
         return
     else:
         print("You are a little bit nervous, right?")
