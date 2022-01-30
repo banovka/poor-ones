@@ -34,6 +34,7 @@ class Engine():
          self.e = "x"
          self.current_place = place[0]
 
+
     def play(self):
 
         def choose_direction():
