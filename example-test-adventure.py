@@ -37,6 +37,7 @@ class Engine():
 
         # How to navigate
         def choose_direction():
+            global task_done, task_todo
             directions = self.current_place.directions
             print("\nYou can leave to: ")
             for i in range(1, (len(directions)+1)):
@@ -46,10 +47,11 @@ class Engine():
             if e == "s":
                 return
             elif e == "e":
+                print("\nYou managed " + str(len(task_done)) + " of " + str(len(task_todo)) + " tasks.")
+                print("\nSee you next time!")
                 quit()
             try:
                 e = int(e)
-                self.e = e
                 if e > 0 and e <= len(directions):
                     self.current_place = place[directions[e-1]]
                     return
@@ -58,6 +60,7 @@ class Engine():
             except:
                 print("\nSorry, something went wrong...")
                 return
+
         # How to choose an object
         def choose_object():
             print("\nYou see: ")
@@ -169,8 +172,9 @@ craft = [
         ["Apple", "Knive", "Slices"]
         ]
 
-# May you have to do a task to go further. Use as "global" in the beginnning of a function.
-task = ["relax", "art_expert"]
+# May you have to do a task_done to go further. Use as "global" in the beginnning of a function.
+task_done = []
+task_todo = ["relax", "art_expert", "eat_a_banana", "watering_flowers"]
 
 #
 # Working with a list in a list. Be carefull with counting the indices!
@@ -192,7 +196,7 @@ def picture(self):
     e = input("Do you [l]ike it? ")
     if e == "l":
         print("You are an expert!")
-        task.append("art_expert")
+        task_done.append("art_expert")
         return
     else:
         print("You should better go to school again...")
@@ -259,7 +263,7 @@ def sofa(self):
             print(".")
             time.sleep(1)
         print("Ahh! It is good to take a rest.")
-        task.append("relax")
+        task_done.append("relax")
         return
     else:
         print("You are a little bit nervous, right?")
@@ -281,6 +285,7 @@ def dustbin(self):
             print("\nPerfect taste! You throw the banana peel on the floor.")
             # After eating you can not have it.
             item.pop("Banana")
+            task_done.append("eat_a_banana")
             return
         else:
             return
@@ -324,7 +329,7 @@ def flowerpot(self):
             if "Watering can" in item:
                 print("\nWell done! They look better. You leave the watering can on the balcony.")
                 item.pop("Watering can")
-                task.append("watering_flowers")
+                task_done.append("watering_flowers")
                 return
             else:
                 print("\nUps... You have no water.")
