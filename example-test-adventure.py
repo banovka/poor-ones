@@ -35,7 +35,9 @@ class Engine():
 
     def play(self):
 
+        # How to navigate
         def choose_direction():
+            global task_done, task_todo
             directions = self.current_place.directions
             print("\nYou can leave to: ")
             for i in range(1, (len(directions)+1)):
@@ -45,10 +47,11 @@ class Engine():
             if e == "s":
                 return
             elif e == "e":
+                print("\nYou managed " + str(len(task_done)) + " of " + str(len(task_todo)) + " tasks.")
+                print("\nSee you next time!")
                 quit()
             try:
                 e = int(e)
-                self.e = e
                 if e > 0 and e <= len(directions):
                     self.current_place = place[directions[e-1]]
                     return
@@ -58,6 +61,7 @@ class Engine():
                 print("\nSorry, something went wrong...")
                 return
 
+        # How to choose an object
         def choose_object():
             print("\nYou see: ")
             for i in range(1, (len(self.current_place.object)+1)):
@@ -77,6 +81,7 @@ class Engine():
                 print("\nSorry, something went wrong...")
                 return
 
+        # How to show items and crafting them
         def items():
             if item:
                 print("\nYour items: ")
@@ -128,6 +133,7 @@ class Engine():
                 print("\nSorry, at this time you do not have any items.")
                 return
 
+        # The main menue
         while 1 == 1:
             print("------------------------------------------------------------------------")
             print("\n" + self.current_place.name + " - " + self.current_place.description)
@@ -166,8 +172,11 @@ craft = [
         ["Apple", "Knive", "Slices"]
         ]
 
-# May you have to do a task to go further. Use as "global" in the beginnning of a function.
-task = []
+# May you have to do a task_done to go further. Use as "global" in the beginnning of a function.
+task_done = []
+
+# Overview about tasks to do
+task_todo = ["relax", "art_expert", "eat_a_banana", "watering_flowers"]
 
 #
 # Working with a list in a list. Be carefull with counting the indices!
@@ -189,6 +198,7 @@ def picture(self):
     e = input("Do you [l]ike it? ")
     if e == "l":
         print("You are an expert!")
+        task_done.append("art_expert")
         return
     else:
         print("You should better go to school again...")
@@ -226,22 +236,26 @@ place.append(Place(name = "Living Room", directions = [0, 3]))
 place[1].set_description("Feel like home")
 place[1].object.append(Object(name = "Table"))
 
+# Example to use the task_done and task_todo lists
 def table(self):
-    global item
-    if not "Key" in item:
-        print("\nThere is a key on the table.")
-        e = input("Do you want to [t]ake the key? ")
-        if e == "t":
-            print("You put the key in your pocket.")
-            # Example to grab a new item
-            item["Key"] = 1
-            return
-        else:
-            print("You leave the key on the table.")
-            return
-    elif "Key" in item:
+    global item, task_done
+    if "Key" in item:
         print("\nThe table is empty.")
         return
+    elif not "Key" in item:
+        if "relax" in task_done:
+            print("\nThere is a key on the table.")
+            e = input("Do you want to [t]ake the key? ")
+            if e == "t":
+                print("You put the key in your pocket.")
+                # Example to grab a new item
+                item["Key"] = 1
+                return
+            else:
+                print("You leave the key on the table.")
+                return
+        else:
+            print("\nYou are very nervous. May relax a little bit?")
 
 place[1].object[0].start = types.MethodType(table, place[1].object[0])
 place[1].object.append(Object(name = "Sofa"))
@@ -255,7 +269,7 @@ def sofa(self):
             print(".")
             time.sleep(1)
         print("Ahh! It is good to take a rest.")
-        task.append("Relax")
+        task_done.append("relax")
         return
     else:
         print("You are a little bit nervous, right?")
@@ -277,6 +291,7 @@ def dustbin(self):
             print("\nPerfect taste! You throw the banana peel on the floor.")
             # After eating you can not have it.
             item.pop("Banana")
+            task_done.append("eat_a_banana")
             return
         else:
             return
@@ -320,7 +335,7 @@ def flowerpot(self):
             if "Watering can" in item:
                 print("\nWell done! They look better. You leave the watering can on the balcony.")
                 item.pop("Watering can")
-                task.append("watering_flowers")
+                task_done.append("watering_flowers")
                 return
             else:
                 print("\nUps... You have no water.")
