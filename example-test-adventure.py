@@ -174,6 +174,8 @@ craft = [
 
 # May you have to do a task_done to go further. Use as "global" in the beginnning of a function.
 task_done = []
+
+# Overview about tasks to do
 task_todo = ["relax", "art_expert", "eat_a_banana", "watering_flowers"]
 
 #
