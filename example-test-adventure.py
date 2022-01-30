@@ -236,22 +236,26 @@ place.append(Place(name = "Living Room", directions = [0, 3]))
 place[1].set_description("Feel like home")
 place[1].object.append(Object(name = "Table"))
 
+# Example to use the task_done and task_todo lists
 def table(self):
-    global item
-    if not "Key" in item:
-        print("\nThere is a key on the table.")
-        e = input("Do you want to [t]ake the key? ")
-        if e == "t":
-            print("You put the key in your pocket.")
-            # Example to grab a new item
-            item["Key"] = 1
-            return
-        else:
-            print("You leave the key on the table.")
-            return
-    elif "Key" in item:
+    global item, task_done
+    if "Key" in item:
         print("\nThe table is empty.")
         return
+    elif not "Key" in item:
+        if "relax" in task_done:
+            print("\nThere is a key on the table.")
+            e = input("Do you want to [t]ake the key? ")
+            if e == "t":
+                print("You put the key in your pocket.")
+                # Example to grab a new item
+                item["Key"] = 1
+                return
+            else:
+                print("You leave the key on the table.")
+                return
+        else:
+            print("\nYou are very nervous. May relax a little bit?")
 
 place[1].object[0].start = types.MethodType(table, place[1].object[0])
 place[1].object.append(Object(name = "Sofa"))
