@@ -157,10 +157,8 @@ object = []
 item = {}
 
 # Some examples of itemes.
-item["Apple"] = 1
 # Eating a banana is minus one.
 item["Banana"] = 2
-item["Milk"] = 1
 # After using a knive, it still exist.
 item["Knive"] = True
 
@@ -168,7 +166,8 @@ item["Knive"] = True
 # An example of crafting rules:
 # If you craft a banana with milk, you get a shake! Or you can slice an apple.
 craft = [
-        ["Banana", "Milk", "Shake"],
+        ["Cat food", "Knive", "Open-cat-food"],
+        ["Open-cat-food", "Feeding dish", "Lucky-cat"],
         ["Apple", "Knive", "Slices"]
         ]
 
@@ -176,7 +175,7 @@ craft = [
 task_done = []
 
 # Overview about tasks to do
-task_todo = ["relax", "art_expert", "eat_a_banana", "watering_flowers"]
+task_todo = ["relax", "art_expert", "eat_a_banana", "watering_flowers", "feed-the-cat"]
 
 #
 # Working with a list in a list. Be carefull with counting the indices!
@@ -306,7 +305,7 @@ place[2].object.append(Object(name = "Sink"))
 def sink(self):
     global item, task
     if "watering_flowers" not in task:
-        e = input("\nNear the sink is a full waterin can. Do you [t]ake it? ")
+        e = input("\nNear the sink is a full watering can. Do you [t]ake it? ")
         if e == "t":
             item["Watering can"] = True
             print("\nOh, it is heavy.")
@@ -319,6 +318,14 @@ def sink(self):
         return
 
 place[2].object[1].start = types.MethodType(sink, place[2].object[1])
+
+# Eat an apple
+def kitchen_table(self):
+    pass
+
+# Take cat's food
+def kitchen_cupboard(self):
+    pass
 
 # Create another place with all stuff
 place.append(Place(name = "Balcony", directions = [1]))
