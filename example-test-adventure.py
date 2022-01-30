@@ -1,11 +1,10 @@
 #
-# The poor ones textadventure engine
+# The [p]oor ones textadventure-engine
 #
 
 import types
 import time
 
-# Test
 # Create a place.
 class Place():
 
@@ -33,7 +32,6 @@ class Engine():
     def __init__(self):
          self.e = "x"
          self.current_place = place[0]
-
 
     def play(self):
 
