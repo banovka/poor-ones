@@ -34,9 +34,6 @@ class Engine():
          self.e = "x"
          self.current_place = place[0]
 
-    def __del__(self):
-        print("Destructor called")
-
     def play(self):
 
         def choose_direction():
