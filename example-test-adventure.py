@@ -211,7 +211,7 @@ place[0].object.append(Object(name = "Door"))
 
 # Create a function for the object with the same name as above
 def door(self):
-    global item
+    global item, task_done
     print("\nThe door is locked.")
     if not "Key" in item:
         print("Sorry...")
@@ -259,7 +259,7 @@ def table(self):
 place[1].object[0].start = types.MethodType(table, place[1].object[0])
 place[1].object.append(Object(name = "Sofa"))
 def sofa(self):
-    global task
+    global item, task_done
     e = input("\nWhat a nice Sofa. Do you want to [s]it down? ")
     if e == "s":
         print("Great! You relax a moment...")
@@ -268,6 +268,7 @@ def sofa(self):
             print(".")
             time.sleep(1)
         print("Ahh! It is good to take a rest.")
+        print("But wait... Oh f**k! You forgot to feed the cat.")
         task_done.append("relax")
         return
     else:
@@ -281,7 +282,7 @@ place[2].set_description("A little bit dirty")
 place[2].object.append(Object(name = "Dustbin"))
 
 def dustbin(self):
-    global item
+    global item, task_done
     print("\nUrg... The dustbin smells like...")
     if "Banana" in item:
         print("\nBut wait, you are hungry. The perfect place to eat your banana.")
@@ -303,7 +304,7 @@ place[2].object[0].start = types.MethodType(dustbin, place[2].object[0])
 place[2].object.append(Object(name = "Sink"))
 
 def sink(self):
-    global item, task
+    global item, task_done
     if "watering_flowers" not in task:
         e = input("\nNear the sink is a full watering can. Do you [t]ake it? ")
         if e == "t":
@@ -321,11 +322,25 @@ place[2].object[1].start = types.MethodType(sink, place[2].object[1])
 
 # Eat an apple
 def kitchen_table(self):
+    global item, task_done
     pass
 
 # Take cat's food
 def kitchen_cupboard(self):
-    pass
+    global item, task_done
+    if "Cat food" in item:
+        print("\nThe cupboard is empty.")
+        return
+    else:
+        print("On the cupboard you find some cats food.")
+        e = input(" Do you [t]ake it? ")
+        if e == "t":
+            print("You grab the cats food.")
+            item["Cat food"] = 1
+            return
+        else:
+            print("You leave the cats food on the cupboard.")
+            return
 
 # Create another place with all stuff
 place.append(Place(name = "Balcony", directions = [1]))
@@ -333,7 +348,7 @@ place[3].set_description("What a wonderfull place!")
 place[3].object.append(Object(name = "Flowerpot"))
 
 def flowerpot(self):
-    global task, item
+    global item, task_done
     if "watering_flowers" in task:
         print("\nThe flowers are so lovly... Nice!")
     else:
