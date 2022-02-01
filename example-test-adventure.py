@@ -1,5 +1,5 @@
 #
-# The [p]oor ones textadventure-engine
+# The [p]oor [o]nes [t]extadventure-engine
 #
 
 import types
@@ -441,13 +441,13 @@ place[4].object[0].start = types.MethodType(terrace, place[3].object[0])
 # Print some prologe:
 print("\nWellcome to the poor ones textadventure engine.")
 print("\nNavigation:")
-print("[a] means, that you can press this key and then ENTER for this action")
+print("[a] means, that you can press this key and then ENTER for this action.")
 print("If you only press ENTER, you go back.")
 
 # Start the game!
 game = Engine()
 game.play()
 
-# Informations after theend of game
+# Informations after the end of game
 print("\nYou solved " + str(len(task_done)) + " of " + str(len(task_todo)) + " tasks.")
 print("\nSee you next time!\n")
