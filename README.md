@@ -1,4 +1,4 @@
-# A simple poor-ones textadventure-game-engine in python
+# The [p]oor [o]nes [t]extadventure-engine in python
 
 At school, my child had the task of writing a small text adventure in Python. Of course, there was no object-oriented programming to begin with. It was about consolidating basic knowledge. He had great fun with it.
 
