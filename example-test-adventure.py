@@ -457,6 +457,6 @@ print("If you only press ENTER, you go back.")
 game = Engine()
 game.play()
 
-# Informations after the end of game
+#  Some informations after the end of game
 print("\nYou solved " + str(len(task_done)) + " of " + str(len(task_todo)) + " tasks.")
 print("\nSee you next time!\n")
