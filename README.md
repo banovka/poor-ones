@@ -8,6 +8,8 @@ There are places between which you can walk back and forth. Objects are added to
 
 Items can also be collected and used to create new ones (crafting).
 
-Just have a look at the example and then use the empty template for your own little adventures.
+So, you should only know about basic stuff like lists, dictionaries, for and while loops, if and else...
+
+Just have a look at the example, read the comments and then use the empty template for your own little adventures.
 
 Have fun!
