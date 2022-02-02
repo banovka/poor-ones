@@ -421,7 +421,6 @@ def flowerpot(self):
 
 place[3].object[0].start = types.MethodType(flowerpot, place[3].object[0])
 
-item["Key"] = True
 # Create a garden
 place.append(Place(name = "Garden", directions = [0]))
 place[4].set_description("Flowers and trees are around.")
