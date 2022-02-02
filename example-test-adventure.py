@@ -2,6 +2,10 @@
 # The [p]oor [o]nes [t]extadventure-engine
 #
 
+#
+# Here come some stuff for the game-engine. Here till row round about 160 is nothing todo for you!
+#
+
 import types
 import time
 
@@ -135,6 +139,7 @@ class Engine():
                 return
 
         # The main menue
+        # If global end = True, the game stops
         global end
         while end == False:
             print("------------------------------------------------------------------------")
@@ -147,6 +152,9 @@ class Engine():
             elif e == "i":
                 items()
 
+# ------------------------------------------------------------------------------
+# At this point the game begin! It is your game...
+#-------------------------------------------------------------------------------
 
 # Create an emty list of places
 place = []
@@ -155,7 +163,7 @@ place = []
 object = []
 
 # Use item in functions as "global item".
-# Items can be int (countable) or True (you have it, but it stay after crafting in your items)
+# Items can be int (countable) or True (you have it, but it stay after crafting something in your items)
 item = {}
 
 # Some examples of itemes.
@@ -194,7 +202,9 @@ place[0].object.append(Object(name = "Picture"))
 
 # Create a function for the object[0] with the same name as above
 def picture(self):
-    global task_done
+    # Add this line with items, task-stuff and the "end" every function.
+    # It does not matter if you need it or not.
+    global item, task_done, task_todo, end
     if "art_expert" in task_done:
         print("\nYou know this picture, you little expert.")
         return
@@ -217,7 +227,7 @@ place[0].object.append(Object(name = "Door"))
 
 # Create a function for the object with the same name as above
 def door(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     print("\nThe door is locked.")
     if "Key" in item:
         e = input("But you have a key in your pocket. Do you want to [u]se it? ")
@@ -246,7 +256,7 @@ place[1].object.append(Object(name = "Table"))
 
 # Example to use the task_done and task_todo lists
 def table(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     if "Key" in item:
         print("\nThe table is empty.")
         return
@@ -271,7 +281,7 @@ place[1].object[0].start = types.MethodType(table, place[1].object[0])
 place[1].object.append(Object(name = "Sofa"))
 
 def sofa(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     if not "relax" in task_done:
         e = input("\nWhat a nice Sofa. Do you want to [s]it down? ")
         if e == "s":
@@ -307,7 +317,7 @@ def cat(self):
         for i in range(0, 4):
             print(".")
             time.sleep(1)
-        # Add the end
+        # Add the end of the game! You can use it in every function if you want
         end = True
         return
     else:
@@ -324,7 +334,7 @@ place[2].set_description("A little bit dirty")
 place[2].object.append(Object(name = "Dustbin"))
 
 def dustbin(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     print("\nUrg... The dustbin smells like...")
     if "Banana" in item:
         print("\nBut wait, you are hungry. The perfect place to eat your banana.")
@@ -347,7 +357,7 @@ place[2].object[0].start = types.MethodType(dustbin, place[2].object[0])
 place[2].object.append(Object(name = "Sink"))
 
 def sink(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     if "watering_flowers" not in task_done:
         e = input("\nNear the sink is a full watering can. Do you [t]ake it? ")
         if e == "t":
@@ -367,7 +377,7 @@ place[2].object[1].start = types.MethodType(sink, place[2].object[1])
 place[2].object.append(Object(name = "Cupboard"))
 
 def kitchen_cupboard(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     if "Cats food" in item:
         print("\nThe cupboard is empty.")
         return
@@ -393,7 +403,7 @@ place[3].set_description("What a wonderfull place!")
 place[3].object.append(Object(name = "Flowerpot"))
 
 def flowerpot(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     if "watering_flowers" in task_done:
         print("\nThe flowers are so lovly... Nice!")
     else:
@@ -421,7 +431,7 @@ place[4].object.append(Object(name = "Terrace"))
 
 #item["Feeding dish"] = True
 def terrace(self):
-    global item, task_done
+    global item, task_done, task_todo, end
     if ("Feeding dish" or "Full feeding dish") in item:
         print("\nThe terrace is tidy. But may you forgot something...")
         return
