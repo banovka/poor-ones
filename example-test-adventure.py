@@ -184,7 +184,7 @@ craft = [
 task_done = []
 
 # Overview about tasks to do
-task_todo = ["relax", "art_expert", "eat_a_banana", "watering_flowers", "feed_the_cat"]
+task_todo = ["open_the_door","relax", "art_expert", "eat_a_banana", "watering_flowers", "feed_the_cat"]
 
 #
 # Working with a list in a list. Be carefull with counting the indices!
@@ -228,19 +228,21 @@ place[0].object.append(Object(name = "Door"))
 # Create a function for the object with the same name as above
 def door(self):
     global item, task_done, task_todo, end
-    print("\nThe door is locked.")
-    if "Key" in item:
-        e = input("But you have a key in your pocket. Do you want to [u]se it? ")
-        if e == "u":
-            print("\nGratulation! Now you can go outside.")
-            # Here an example to add a new direction
-            place[0].directions.append(4)
-            item.pop("Key")
-            return
-        else:
-            return
+    if "open_the_door" not in task_done:
+        print("\nThe door is locked.")
+        if "Key" in item:
+            e = input("But you have a key in your pocket. Do you want to [u]se it? ")
+            if e == "u":
+                print("\nGratulation! Now you can go outside.")
+                # Here an example to add a new direction
+                place[0].directions.append(4)
+                item.pop("Key")
+                task_done.append("open_the_door")
+                return
+            else:
+                return
     else:
-        print("Sorry...")
+        print("The door is already unlocked, you can go outside")
         return
 
 # Bind the function to the new object[1] with the same name as above and the new index[1]!
@@ -314,6 +316,7 @@ def cat(self):
         print("You go to your sofa, sit down. Relax again.")
         print("What a wonderfull day.")
         task_done.append("feed_the_cat")
+        item.pop("Full feeding dish")
         for i in range(0, 4):
             print(".")
             time.sleep(1)
@@ -428,10 +431,10 @@ place[4].set_description("Flowers and trees are around.")
 # Add a terrace
 place[4].object.append(Object(name = "Terrace"))
 
-#item["Feeding dish"] = True
+# Add a terrace to the garden
 def terrace(self):
     global item, task_done, task_todo, end
-    if ("Feeding dish" or "Full feeding dish") in item:
+    if "Full feeding dish" in item or "Feeding dish" in item or "feed_the_cat" in task_done:
         print("\nThe terrace is tidy. But may you forgot something...")
         return
     else:
@@ -439,7 +442,7 @@ def terrace(self):
         e = input("Do you [t]ake it? ")
         if e == "t":
             print("You grab the feeding dish.")
-            item["Feeding dish"] = True
+            item["Feeding dish"] = 1
             return
         else:
             print("You leave the feeding dish at the corner.")
